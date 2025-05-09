@@ -48,7 +48,7 @@ Aplikasi ini membantu orang tua untuk:
 ## 📌 Fitur Utama
 
 - Kandungan vitamin dihitung dalam **miligram (mg)**
-- Dapat digunakan untuk bayi usia **6–24 bulan**
+- Dapat digunakan untuk bayi usia **6 SAMPAI 24 bulan**
 - Data berdasarkan sumber resmi: **USDA, WHO, Kemenkes RI**
 
 ---
