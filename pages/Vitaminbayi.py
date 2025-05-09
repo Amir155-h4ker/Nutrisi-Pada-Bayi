@@ -53,5 +53,5 @@ Aplikasi ini membantu orang tua untuk:
 
 ---
 
-👉 Klik tab **Kalkulator** di sidebar kiri untuk mulai menghitung MPASI bayi Anda!
+ Klik tab **Kalkulator** di sidebar kiri untuk mulai menghitung MPASI bayi Anda!
 """)
