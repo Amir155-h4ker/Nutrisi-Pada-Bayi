@@ -1,40 +1,18 @@
 import streamlit as st
 import pandas as pd
 
-# Konfigurasi
-st.set_page_config(page_title="Kalkulator Kadar Vitamin pada MPASI Untuk Bayi", layout="wide")
+# Konfigurasi halaman
+st.set_page_config(page_title="Kalkulator Vitamin MPASI", layout="wide")
 
-# Fungsi ganti halaman
+# Fungsi untuk navigasi halaman
 def set_page(page_name):
     st.session_state.page = page_name
-    
-# Inisialisasi halaman pertama
+
+# Inisialisasi halaman
 if "page" not in st.session_state:
     st.session_state.page = "beranda"
 
-# ===================== BERANDA =====================
-if st.session_state.page == "beranda":
-    st.title("👶 Selamat Datang di Aplikasi Kalkulator Kadar Vitamin Pada MPASI Untuk Bayi🍽️")
-    st.markdown("""
-    Aplikasi ini membantu Anda menghitung kadar vitamin pada mpasi untuk bayi dari berbagai bahan pangan berdasarkan berat (gram) dan umur bayi.
-
-    ### Fitur:
-    - 🥕 Menghitung kandungan vitamin dari bahan MPASI
-    - 👶 Menyesuaikan dengan kebutuhan vitamin berdasarkan usia bayi
-    - 🍗 Merancang menu yang bergizi dan seimbang
-
-    ---  
-    """)
-    st.button("➡ Mulai Perhitungan", on_click=set_page, args=("perhitungan",))
-
-# ===================== PERHITUNGAN =====================
-elif st.session_state.page == "perhitungan":
-    st.title("Perhitungan Kadar Vitamin Pada MPASI Untuk Bayi")
-    st.button("🔙 Kembali ke Beranda", on_click=set_page, args=("beranda",))
-
-#=============================== 
-# Data vitamin per 100 gram (mg)
-# ==============================
+# ===================== DATA VITAMIN =====================
 vitamin_data_mg = {
     "Wortel": {"Vitamin A (mg)": 0.835, "Vitamin B1 (mg)": 0.07, "Vitamin C (mg)": 5.9, "Vitamin D (mg)": 0, "Vitamin E (mg)": 0.66},
     "Bayam": {"Vitamin A (mg)": 0.469, "Vitamin B1 (mg)": 0.10, "Vitamin C (mg)": 28.1, "Vitamin D (mg)": 0, "Vitamin E (mg)": 2.0},
@@ -47,9 +25,7 @@ vitamin_data_mg = {
     "Hati Ayam": {"Vitamin A (mg)": 9.442, "Vitamin B1 (mg)": 0.23, "Vitamin C (mg)": 27.0, "Vitamin D (mg)": 0.00175, "Vitamin E (mg)": 0.5},
 }
 
-# ==============================
-# Fungsi kebutuhan vitamin bayi berdasarkan usia
-# ==============================
+# ===================== FUNGSI VITAMIN =====================
 def kebutuhan_vitamin_mg(usia_bulan):
     if usia_bulan <= 11:
         return {
@@ -68,9 +44,6 @@ def kebutuhan_vitamin_mg(usia_bulan):
             "Vitamin E (mg)": 6,
         }
 
-# ==============================
-# Estimasi Porsi MPASI berdasarkan usia
-# ==============================
 def estimasi_porsi(usia_bulan):
     if usia_bulan <= 8:
         return 50
@@ -81,42 +54,48 @@ def estimasi_porsi(usia_bulan):
     else:
         return 200
 
-# ==============================
-# Streamlit App
-# ==============================
-st.set_page_config(page_title="Kalkulator Vitamin MPASI", layout="centered")
-st.title("🍼 Kalkulator Kadar Vitamin MPASI untuk Bayi")
+# ===================== BERANDA =====================
+if st.session_state.page == "beranda":
+    st.title("👶 Selamat Datang di Aplikasi Kalkulator Vitamin MPASI 🍽️")
+    st.markdown("""
+Aplikasi ini membantu menghitung kadar vitamin dalam MPASI bayi berdasarkan bahan makanan, berat (gram), dan usia bayi.
 
-st.markdown("""
-Aplikasi ini menghitung kadar vitamin dari bahan MPASI berdasarkan jumlah konsumsi dan membandingkannya dengan kebutuhan vitamin harian berdasarkan usia bayi.
+### Fitur:
+- 🥕 Hitung kandungan vitamin dari bahan MPASI
+- 👶 Sesuaikan dengan kebutuhan vitamin berdasarkan usia bayi
+- 🍗 Rancang menu MPASI yang bergizi dan seimbang
+
 """)
+    st.button("➡ Mulai Perhitungan", on_click=set_page, args=("perhitungan",))
 
-# Input usia bayi
-usia = st.slider("Usia bayi (bulan):", min_value=6, max_value=24, value=9)
-kebutuhan = kebutuhan_vitamin_mg(usia)
-default_porsi = estimasi_porsi(usia)
+# ===================== KALKULATOR =====================
+elif st.session_state.page == "perhitungan":
+    st.title("🧮 Kalkulator Kadar Vitamin MPASI untuk Bayi")
+    st.button("🔙 Kembali ke Beranda", on_click=set_page, args=("beranda",))
 
-# Pilih bahan MPASI
-bahan_dipilih = st.multiselect("Pilih bahan MPASI:", list(vitamin_data_mg.keys()))
+    usia = st.slider("Usia bayi (bulan):", min_value=6, max_value=24, value=9)
+    kebutuhan = kebutuhan_vitamin_mg(usia)
+    default_porsi = estimasi_porsi(usia)
 
-# Inisialisasi total
-total_vitamin = {k: 0 for k in kebutuhan}
+    bahan_dipilih = st.multiselect("Pilih bahan MPASI:", list(vitamin_data_mg.keys()))
 
-if bahan_dipilih:
-    st.subheader("⚖️ Masukkan jumlah gram untuk setiap bahan:")
-    for bahan in bahan_dipilih:
-        gram = st.number_input(f"{bahan} (gram):", min_value=0, max_value=500, value=default_porsi, step=10)
-        for vitamin in total_vitamin:
-            total_vitamin[vitamin] += vitamin_data_mg[bahan][vitamin] * gram / 100
+    total_vitamin = {k: 0 for k in kebutuhan}
 
-    st.subheader("📊 Total Asupan Vitamin (mg)")
-    hasil_df = pd.DataFrame({
-        "Asupan MPASI (mg)": total_vitamin,
-        "Kebutuhan Harian (mg)": kebutuhan,
-        "Persentase Kecukupan (%)": {
-            k: round((total_vitamin[k] / kebutuhan[k]) * 100, 1) if kebutuhan[k] > 0 else 0
-            for k in kebutuhan
-        }
-    })
+    if bahan_dipilih:
+        st.subheader("⚖️ Masukkan jumlah gram untuk setiap bahan:")
+        for bahan in bahan_dipilih:
+            gram = st.number_input(f"{bahan} (gram):", min_value=0, max_value=500, value=default_porsi, step=10)
+            for vitamin in total_vitamin:
+                total_vitamin[vitamin] += vitamin_data_mg[bahan][vitamin] * gram / 100
 
-    st.dataframe(hasil_df)
+        st.subheader("📊 Total Asupan Vitamin (mg)")
+        hasil_df = pd.DataFrame({
+            "Asupan MPASI (mg)": total_vitamin,
+            "Kebutuhan Harian (mg)": kebutuhan,
+            "Persentase Kecukupan (%)": {
+                k: round((total_vitamin[k] / kebutuhan[k]) * 100, 1) if kebutuhan[k] > 0 else 0
+                for k in kebutuhan
+            }
+        })
+
+        st.dataframe(hasil_df)
