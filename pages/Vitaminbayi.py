@@ -32,7 +32,7 @@ elif st.session_state.page == "perhitungan":
     st.title("Perhitungan Kadar Vitamin Pada MPASI Untuk Bayi")
     st.button("🔙 Kembali ke Beranda", on_click=set_page, args=("beranda",))
 
-# Inisialisasi bahan 
+#=============================== 
 # Data vitamin per 100 gram (mg)
 # ==============================
 vitamin_data_mg = {
