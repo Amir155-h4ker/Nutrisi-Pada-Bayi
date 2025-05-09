@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Konfigurasi
-st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="wide")
+st.set_page_config(page_title="Kalkulator Kadar Vitamin pada MPASI Untuk Bayi", layout="wide")
 
 # Fungsi ganti halaman
 def set_page(page_name):
@@ -14,14 +14,15 @@ if "page" not in st.session_state:
 
 # ===================== BERANDA =====================
 if st.session_state.page == "beranda":
-    st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
+    st.title("👶 Selamat Datang di Aplikasi Kalkulator Kadar Vitamin Pada MPASI Untuk Bayi🍽️")
     st.markdown("""
-    Aplikasi ini membantu Anda menghitung total nilai gizi dari berbagai bahan pangan berdasarkan berat (gram) yang dimasukkan.
+    Aplikasi ini membantu Anda menghitung kadar vitamin pada mpasi untuk bayi dari berbagai bahan pangan berdasarkan berat (gram) dan umur bayi.
 
     ### Fitur:
-    - Pilih beberapa bahan pangan
-    - Masukkan jumlah dalam gram
-    - Dapatkan total nilai kalori, protein, lemak, dan karbohidrat
+    - Masukkan umur bayi (dalam bulan)
+    - Pilih bahan pangan 
+    - Pilih berat bahan pangan
+    - Dapatkan tabel hasil kadar vitamin bahan pangan
     - Lihat detail per bahan
 
     ---  
