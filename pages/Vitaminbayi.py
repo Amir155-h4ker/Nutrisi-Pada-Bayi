@@ -19,11 +19,9 @@ if st.session_state.page == "beranda":
     Aplikasi ini membantu Anda menghitung kadar vitamin pada mpasi untuk bayi dari berbagai bahan pangan berdasarkan berat (gram) dan umur bayi.
 
     ### Fitur:
-    - Masukkan umur bayi (dalam bulan)
-    - Pilih bahan pangan 
-    - Pilih berat bahan pangan
-    - Dapatkan tabel hasil kadar vitamin bahan pangan
-    - Lihat detail per bahan
+    - 🥕 Menghitung kandungan vitamin dari bahan MPASI
+    - 👶 Menyesuaikan dengan kebutuhan vitamin berdasarkan usia bayi
+    - 🍗 Merancang menu yang bergizi dan seimbang
 
     ---  
     """)
