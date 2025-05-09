@@ -25,7 +25,7 @@ if st.session_state.page == "Beranda":
   - Dapatkan tabel hasil kadar vitamin
 
   ---
-  """)
+  
 
 ## 🍼 Apa Itu Aplikasi Ini?
 
@@ -54,3 +54,4 @@ Aplikasi ini membantu orang tua untuk:
 ---
 
  Klik tab **Kalkulator** di sidebar kiri untuk mulai menghitung MPASI bayi Anda!
+ """)
