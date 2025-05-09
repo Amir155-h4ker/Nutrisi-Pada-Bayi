@@ -30,7 +30,7 @@ if st.session_state.page == "Beranda":
 ## 🍼 Apa Itu Aplikasi Ini?
 
 Aplikasi ini membantu orang tua untuk:
-- 🥕 Menghitung kandungan vitamin dari bahan 
+-  Menghitung kandungan vitamin dari bahan MPASI
 - 👶 Menyesuaikan dengan kebutuhan vitamin berdasarkan usia bayi
 - 🍗 Merancang menu yang bergizi dan seimbang
 
