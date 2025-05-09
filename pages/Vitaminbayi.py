@@ -14,7 +14,7 @@ if "page" not in st.session_state:
 
 # ===================== BERANDA =====================
 if st.session_state.page == "Beranda":
-  st.title("👶🍽️ Selamat Datang di Aplikasi Vitamin MPASI")
+  st.title("👶🍽️ Selamat Datang di Aplikasi Vitamin")
   st.markdown("""
   Aplikasi ini membantu Anda menhitung kadar vitamin pada mpasi untuk bayi berdasarkan berat (mg) bahan makanan dan umur bayi.
   
